@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Line Chart</title>
+		<script src="js/chart.js"></script>
+	</head>
+	<body>
+		<div style="width:90%; margin-left: auto; margin-right: auto;">
+			<div>
+				<canvas id="canvas"></canvas>
+			</div>
+		</div>
+		<script>
+			var randomScalingFactor = function(){ return Math.round(Math.random())};			
+			var standardData = {
+				labels : ["0","1","2","3","4","5","6","7","8","9","10","11","12","13"],
+				datasets : [
+					{
+						label: "-3SD",
+						fillColor : "rgba(0,0,0,0)",
+						strokeColor : "rgba(220,220,220,1)",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#fff",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(220,220,220,1)",
+						data : [44.2,45.4,46.6,47.6,48.6,49.5,50.3,51.1,51.9,52.6,53.3,54,54.7,55.3]
+					},
+					{
+						label: "-2SD",
+						fillColor : "rgba(0,0,0,0)",
+						strokeColor : "rgba(220,220,220,1)",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#fff",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(220,220,220,1)",
+						data : [46.1,47.3,48.5,49.5,50.5,51.4,52.3,53.1,53.9,54.6,55.4,56,56.7,57.3]
+					},
+					{
+						label: "-1SD",
+						fillColor : "rgba(0,0,0,0)",
+						strokeColor : "rgba(220,220,220,1)",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#fff",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(220,220,220,1)",
+						data : [48,49.2,50.4,51.5,52.4,53.4,54.3,55.1,55.9,56.6,57.4,58.1,58.7,59.4]
+					},
+					{
+						label: "Med",
+						fillColor : "rgba(0,0,0,0)",
+						strokeColor : "rgba(220,220,220,1)",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#fff",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(220,220,220,1)",
+						data : [49.9,51.1,52.3,53.4,54.4,55.3,56.2,57.1,57.9,58.7,59.4,60.1,60.8,61.4]
+					},
+					{
+						label: "1SD",
+						fillColor : "rgba(0,0,0,0)",
+						strokeColor : "rgba(220,220,220,1)",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#fff",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(220,220,220,1)",
+						data : [51.8,53,54.3,55.3,56.3,57.3,58.2,59.1,59.9,60.7,61.4,62.1,62.8,63.4]
+					},
+					{
+						label: "2SD",
+						fillColor : "rgba(0,0,0,0)",
+						strokeColor : "rgba(220,220,220,1)",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#fff",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(220,220,220,1)",
+						data : [53.7,54.9,56.2,57.2,58.3,59.2,60.2,61,61.9,62.7,63.4,64.1,64.8,65.5]
+					},
+					{
+						label: "3SD",
+						fillColor : "rgba(0,0,0,0)",
+						strokeColor : "rgba(220,220,220,1)",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#fff",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(220,220,220,1)",
+						data : [55.6,56.8,58.1,59.2,60.2,61.2,62.1,63,63.9,64.7,65.4,66.2,66.9,67.5]
+					},
+					{
+						label: "Your Kid",
+						fillColor : "rgba(0,0,0,0)",
+						strokeColor : "#F7464A",
+						pointColor : "#F7464A",
+						pointStrokeColor : "#fff",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "#F7464A",
+						data : [randomScalingFactor()+49.9,
+								randomScalingFactor()+51.1,
+								randomScalingFactor()+52.3,
+								randomScalingFactor()+53.4,
+								randomScalingFactor()+54.4,
+								randomScalingFactor()+55.3,
+								randomScalingFactor()+56.2,
+								randomScalingFactor()+57.1,
+								randomScalingFactor()+57.9,
+								randomScalingFactor()+58.7,
+								randomScalingFactor()+59.4,
+								randomScalingFactor()+60.1,
+								randomScalingFactor()+60.8,
+								randomScalingFactor()+61.4]
+					}
+				]
+			}
+
+		window.onload = function(){
+			var ctx = document.getElementById("canvas").getContext("2d");
+			window.myLine = new Chart(ctx).Line(standardData, {
+				responsive: true,
+				pointDot : true,
+				showTooltips: true,
+				bezierCurve : false,
+				scaleLineWidth: 5,
+				datasetStrokeWidth : 2,
+				pointDotStrokeWidth : 1,
+				scaleLabel: "<%=value%>",
+			});
+		}
+		</script>
+	</body>
+</html>	
