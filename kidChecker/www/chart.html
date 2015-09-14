@@ -17,6 +17,7 @@
     <style>
         .nav-justified > li > a
         {
+		    width: 100%;
             margin-bottom: 10px;
         }
     </style>
@@ -43,7 +44,7 @@
         <div class="ui bottom attached segment pushable">
             <div class="ui inverted labeled icon left inline vertical sidebar menu">
                 <a style="text-align: left;" class="item" href="index.html"><span class="glyphicon glyphicon-align-justify">
-                </span>&nbsp;&nbsp;&nbsp; Manage Children </a><a style="text-align: left;" class="item">
+                </span>&nbsp;&nbsp;&nbsp; Manage Children </a><a style="text-align: left;" class="item" href="detail.html">
                     <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp; John </a><a style="text-align: left;"
                         class="item"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp; Anna
                         Loc </a><a style="text-align: left;" class="item"><span class="glyphicon glyphicon-user">
@@ -52,15 +53,15 @@
             <div class="pusher" style="height: 100%">
                 <div class="ui basic segment" style="height: 100%">
                     <ul class="nav nav-pills nav-justified">
-                        <li class="active"><a data-toggle="tab" href="#Weight" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <li class="active"><a data-toggle="tab" href="#Weight" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" tag="canvasWeight">
                             <span class="glyphicon glyphicon-download-alt"></span>
                             <br />
                             Weight</a></li>
-                        <li><a data-toggle="tab" href="#Height" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <li title="canvasHeight"><a data-toggle="tab" href="#Height" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" tag="canvasHeight">
                             <span class="glyphicon glyphicon-stats"></span>
                             <br />
                             Height</a></li>
-                        <li><a data-toggle="tab" href="#Head" class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><span
+                        <li title="canvasHead"><a data-toggle="tab" href="#Head" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" tag="canvasHead"><span
                             class="glyphicon glyphicon-user"></span>
                             <br />
                             Head</a></li>
@@ -73,14 +74,14 @@
                                 <canvas id="canvasWeight" style="height: 100%"></canvas>
                             </div>
                         </div>
-                        <div id="Height" class="tab-pane fade">
+                        <div id="Height" class="tab-pane fade" style="height: 100%">
                             <h3>
                                 Height</h3>
                             <div style="width: 90%; height: 80%; margin-left: auto; margin-right: auto;">
                                 <canvas id="canvasHeight" style="height: 100%"></canvas>
                             </div>
                         </div>
-                        <div id="Head" class="tab-pane fade">
+                        <div id="Head" class="tab-pane fade" style="height: 100%">
                             <h3>
                                 Head</h3>
                             <div style="width: 90%; height: 80%; margin-left: auto; margin-right: auto;">
@@ -93,6 +94,9 @@
         </div>
     </div>
     <script>
+			
+			// Define data 
+	
 			var randomScalingFactor = function(){ return Math.round(Math.random())};			
 			var standardData = {
 				labels : ["0","1","2","3","4","5","6","7","8","9","10","11","12","13"],
@@ -193,8 +197,9 @@
 				]
 			}
 
-            function loadChart(){
-			    var ctx = document.getElementById("canvasWeight").getContext("2d");
+			// Methods
+			function loadChart(canvasName){
+			    var ctx = document.getElementById(canvasName).getContext("2d");
 			    window.myLine = new Chart(ctx).Line(standardData, {
 				    responsive: true,
                     maintainAspectRatio: false,
@@ -206,34 +211,17 @@
 				    pointDotStrokeWidth : 1,
 				    scaleLabel: "<%=value%>",			    
                  });
-
-               var ctx2 = document.getElementById("canvasHeight").getContext("2d");
-			    window.myLine = new Chart(ctx2).Line(standardData, {
-				    responsive: true,
-                    maintainAspectRatio: false,
-				    pointDot : true,
-				    showTooltips: true,
-				    bezierCurve : true,
-				    scaleLineWidth: 5,
-				    datasetStrokeWidth : 2,
-				    pointDotStrokeWidth : 1,
-				    scaleLabel: "<%=value%>",
-			    });
-
-               var ctx3 = document.getElementById("canvasHead").getContext("2d");
-			    window.myLine = new Chart(ctx3).Line(standardData, {
-				    responsive: true,
-                    maintainAspectRatio: false,
-				    pointDot : true,
-				    showTooltips: true,
-				    bezierCurve : true,
-				    scaleLineWidth: 5,
-				    datasetStrokeWidth : 2,
-				    pointDotStrokeWidth : 1,
-				    scaleLabel: "<%=value%>",
-			    });
             }
-		window.onload = loadChart();
+			
+			// Set event
+			$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                var target = $(e.target).attr("tag") // get id of canvas from 'tag' attribute
+                loadChart(target);
+            });
+			
+			// Onload
+			// Load Weight chart
+			window.onload = loadChart("canvasWeight");
     </script>
 </body>
 </html>
