@@ -8,6 +8,7 @@
     <title>kidChecker</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<script src="js/index.js"></script>
     <script src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/semantic.min.css" />
@@ -32,12 +33,9 @@
         </div>
         <div class="ui bottom attached segment pushable">
             <div class="ui inverted labeled icon left inline vertical sidebar menu">
-                <a style="text-align: left;" class="item" href="index.html"><span class="glyphicon glyphicon-align-justify">
-                </span>&nbsp;&nbsp;&nbsp; Manage Children </a><a style="text-align: left;" class="item" href="detail.html">
-                    <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp; John </a><a style="text-align: left;"
-                        class="item"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp; Anna
-                        Loc </a><a style="text-align: left;" class="item"><span class="glyphicon glyphicon-user">
-                        </span>&nbsp;&nbsp;&nbsp; Lucy Loc </a>
+                <a id="manageChildrenLink" style="text-align: left;" class="item" href="index.html"><span class="glyphicon glyphicon-align-justify">
+                </span>&nbsp;&nbsp;&nbsp; Manage Children </a>
+				
             </div>
             <div class="pusher">
                 <div class="ui basic segment">
@@ -64,5 +62,10 @@
                 </div>
             </div>
         </div>
+		
+		<script type="text/javascript">
+          initializeMasterData();
+          loadDataToMenu();
+    	</script>
 </body>
 </html>
