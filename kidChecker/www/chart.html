@@ -1,13 +1,14 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-    <title>Line Chart</title>
+  <head>
+    <title></title>
     <!--Standard Meta -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+    <script src="js/index.js"></script>
     <script src="js/chart.js"></script>
     <script src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -15,213 +16,248 @@
     <link rel="stylesheet" type="text/css" href="css/docs.css" />
     <script src="js/semantic.min.js"></script>
     <style>
-        .nav-justified > li > a
-        {
-		    width: 100%;
-            margin-bottom: 10px;
-        }
+      .nav-justified > li > a
+      {
+      width: 100%;
+      margin-bottom: 10px;
+      }
     </style>
     <script type="text/javascript">
-        $(function () {
-            // using context
-            $('.context.example .ui.sidebar').sidebar({
-                context: $('.context.example .bottom.segment')
-            }).sidebar('attach events', '.context.example .menu .item');
-        });
-    	</script>
-</head>
-<body>
+      $(function () {
+      // using context
+      $('.context.example .ui.sidebar').sidebar({
+      context: $('.context.example .bottom.segment')
+      }).sidebar('attach events', '.context.example .menu .item');
+      });
+    </script>
+  </head>
+  <body>
     <div class="context example" style="height: 92.3%">
-        <div class="ui top attached demo menu">
-            <a class="item"><i class="sidebar icon"></i></a>
-            <div style="padding: .92857143em 1.14285714em;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                John
-                <button style="" type="button" class="btn pull-right">
-                    <span class="glyphicon glyphicon-edit pull-right"></span>
-                </button>
-            </div>
+      <div class="ui top attached demo menu">
+        <a class="item">
+          <i class="sidebar icon"></i>
+        </a>
+        <div id="titleName" style="padding: .92857143em 1.14285714em;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+          undefine
+          <button type="button" class="btn pull-right">
+            <span class="glyphicon glyphicon-edit pull-right"></span>
+          </button>
         </div>
-        <div class="ui bottom attached segment pushable">
-            <div class="ui inverted labeled icon left inline vertical sidebar menu">
-                <a style="text-align: left;" class="item" href="index.html"><span class="glyphicon glyphicon-align-justify">
-                </span>&nbsp;&nbsp;&nbsp; Manage Children </a><a style="text-align: left;" class="item" href="detail.html">
-                    <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp; John </a><a style="text-align: left;"
-                        class="item"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp; Anna
-                        Loc </a><a style="text-align: left;" class="item"><span class="glyphicon glyphicon-user">
-                        </span>&nbsp;&nbsp;&nbsp; Lucy Loc </a>
-            </div>
-            <div class="pusher" style="height: 100%">
-                <div class="ui basic segment" style="height: 100%">
-                    <ul class="nav nav-pills nav-justified">
-                        <li class="active"><a data-toggle="tab" href="#Weight" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" tag="canvasWeight">
-                            <span class="glyphicon glyphicon-download-alt"></span>
-                            <br />
-                            Weight</a></li>
-                        <li title="canvasHeight"><a data-toggle="tab" href="#Height" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" tag="canvasHeight">
-                            <span class="glyphicon glyphicon-stats"></span>
-                            <br />
-                            Height</a></li>
-                        <li title="canvasHead"><a data-toggle="tab" href="#Head" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" tag="canvasHead"><span
+      </div>
+      <div class="ui bottom attached segment pushable">
+        <div class="ui inverted labeled icon left inline vertical sidebar menu">
+          <a id="manageChildrenLink" style="text-align: left;" class="item" href="index.html">
+            <span class="glyphicon glyphicon-align-justify">
+            </span>&nbsp;&nbsp;&nbsp; Manage Children
+          </a>
+        </div>
+        <div class="pusher" style="height: 100%">
+          <div class="ui basic segment" style="height: 100%">
+            <ul class="nav nav-pills nav-justified">
+              <li class="active">
+                <a data-toggle="tab" href="#Weight" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" tag="canvasWeight">
+                  <span class="glyphicon glyphicon-download-alt"></span>
+                  <br />
+                  Weight
+                </a>
+              </li>
+              <li title="canvasHeight">
+                <a data-toggle="tab" href="#Height" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" tag="canvasHeight">
+                  <span class="glyphicon glyphicon-stats"></span>
+                  <br />
+                  Height
+                </a>
+              </li>
+              <li title="canvasHead">
+                <a data-toggle="tab" href="#Head" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" tag="canvasHead">
+                  <span
                             class="glyphicon glyphicon-user"></span>
-                            <br />
-                            Head</a></li>
-                    </ul>
-                    <div class="tab-content" style="height: 100%">
-                        <div id="Weight" class="tab-pane fade in active" style="height: 100%">
-                            <h3>
-                                Weight</h3>
-                            <div style="width: 90%; height: 80%; margin-left: auto; margin-right: auto;">
-                                <canvas id="canvasWeight" style="height: 100%"></canvas>
-                            </div>
-                        </div>
-                        <div id="Height" class="tab-pane fade" style="height: 100%">
-                            <h3>
-                                Height</h3>
-                            <div style="width: 90%; height: 80%; margin-left: auto; margin-right: auto;">
-                                <canvas id="canvasHeight" style="height: 100%"></canvas>
-                            </div>
-                        </div>
-                        <div id="Head" class="tab-pane fade" style="height: 100%">
-                            <h3>
-                                Head</h3>
-                            <div style="width: 90%; height: 80%; margin-left: auto; margin-right: auto;">
-                                <canvas id="canvasHead" style="height: 100%"></canvas>
-                            </div>
-                        </div>
-                    </div>
+                  <br />
+                  Head
+                </a>
+              </li>
+            </ul>
+            <div class="tab-content" style="height: 100%">
+              <div id="Weight" class="tab-pane fade in active" style="height: 100%">
+                <h3>
+                  Weight
+                </h3>
+                <div style="width: 90%; height: 80%; margin-left: auto; margin-right: auto;">
+                  <canvas id="canvasWeight" style="height: 100%"></canvas>
                 </div>
+              </div>
+              <div id="Height" class="tab-pane fade" style="height: 100%">
+                <h3>
+                  Height
+                </h3>
+                <div style="width: 90%; height: 80%; margin-left: auto; margin-right: auto;">
+                  <canvas id="canvasHeight" style="height: 100%"></canvas>
+                </div>
+              </div>
+              <div id="Head" class="tab-pane fade" style="height: 100%">
+                <h3>
+                  Head
+                </h3>
+                <div style="width: 90%; height: 80%; margin-left: auto; margin-right: auto;">
+                  <canvas id="canvasHead" style="height: 100%"></canvas>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
     <script>
-			
-			// Define data 
-	
-			var randomScalingFactor = function(){ return Math.round(Math.random())};			
-			var standardData = {
-				labels : ["0","1","2","3","4","5","6","7","8","9","10","11","12","13"],
-				datasets : [
-					{
-						label: "-3SD",
-						fillColor : "rgba(0,0,0,0)",
-						strokeColor : "rgba(220,220,220,1)",
-						pointColor : "rgba(220,220,220,1)",
-						pointStrokeColor : "#fff",
-						pointHighlightFill : "#fff",
-						pointHighlightStroke : "rgba(220,220,220,1)",
-						data : [44.2,45.4,46.6,47.6,48.6,49.5,50.3,51.1,51.9,52.6,53.3,54,54.7,55.3]
-					},
-					{
-						label: "-2SD",
-						fillColor : "rgba(0,0,0,0)",
-						strokeColor : "rgba(220,220,220,1)",
-						pointColor : "rgba(220,220,220,1)",
-						pointStrokeColor : "#fff",
-						pointHighlightFill : "#fff",
-						pointHighlightStroke : "rgba(220,220,220,1)",
-						data : [46.1,47.3,48.5,49.5,50.5,51.4,52.3,53.1,53.9,54.6,55.4,56,56.7,57.3]
-					},
-					{
-						label: "-1SD",
-						fillColor : "rgba(0,0,0,0)",
-						strokeColor : "rgba(220,220,220,1)",
-						pointColor : "rgba(220,220,220,1)",
-						pointStrokeColor : "#fff",
-						pointHighlightFill : "#fff",
-						pointHighlightStroke : "rgba(220,220,220,1)",
-						data : [48,49.2,50.4,51.5,52.4,53.4,54.3,55.1,55.9,56.6,57.4,58.1,58.7,59.4]
-					},
-					{
-						label: "Med",
-						fillColor : "rgba(0,0,0,0)",
-						strokeColor : "rgba(220,220,220,1)",
-						pointColor : "rgba(220,220,220,1)",
-						pointStrokeColor : "#fff",
-						pointHighlightFill : "#fff",
-						pointHighlightStroke : "rgba(220,220,220,1)",
-						data : [49.9,51.1,52.3,53.4,54.4,55.3,56.2,57.1,57.9,58.7,59.4,60.1,60.8,61.4]
-					},
-					{
-						label: "1SD",
-						fillColor : "rgba(0,0,0,0)",
-						strokeColor : "rgba(220,220,220,1)",
-						pointColor : "rgba(220,220,220,1)",
-						pointStrokeColor : "#fff",
-						pointHighlightFill : "#fff",
-						pointHighlightStroke : "rgba(220,220,220,1)",
-						data : [51.8,53,54.3,55.3,56.3,57.3,58.2,59.1,59.9,60.7,61.4,62.1,62.8,63.4]
-					},
-					{
-						label: "2SD",
-						fillColor : "rgba(0,0,0,0)",
-						strokeColor : "rgba(220,220,220,1)",
-						pointColor : "rgba(220,220,220,1)",
-						pointStrokeColor : "#fff",
-						pointHighlightFill : "#fff",
-						pointHighlightStroke : "rgba(220,220,220,1)",
-						data : [53.7,54.9,56.2,57.2,58.3,59.2,60.2,61,61.9,62.7,63.4,64.1,64.8,65.5]
-					},
-					{
-						label: "3SD",
-						fillColor : "rgba(0,0,0,0)",
-						strokeColor : "rgba(220,220,220,1)",
-						pointColor : "rgba(220,220,220,1)",
-						pointStrokeColor : "#fff",
-						pointHighlightFill : "#fff",
-						pointHighlightStroke : "rgba(220,220,220,1)",
-						data : [55.6,56.8,58.1,59.2,60.2,61.2,62.1,63,63.9,64.7,65.4,66.2,66.9,67.5]
-					},
-					{
-						label: "Your Kid",
-						fillColor : "rgba(0,0,0,0)",
-						strokeColor : "#F7464A",
-						pointColor : "#F7464A",
-						pointStrokeColor : "#fff",
-						pointHighlightFill : "#fff",
-						pointHighlightStroke : "#F7464A",
-						data : [randomScalingFactor()+49.9,
-								randomScalingFactor()+51.1,
-								randomScalingFactor()+52.3,
-								randomScalingFactor()+53.4,
-								randomScalingFactor()+54.4,
-								randomScalingFactor()+55.3,
-								randomScalingFactor()+56.2,
-								randomScalingFactor()+57.1,
-								randomScalingFactor()+57.9,
-								randomScalingFactor()+58.7,
-								randomScalingFactor()+59.4,
-								randomScalingFactor()+60.1,
-								randomScalingFactor()+60.8,
-								randomScalingFactor()+61.4]
-					}
-				]
-			}
+      // Define data
 
-			// Methods
-			function loadChart(canvasName){
-			    var ctx = document.getElementById(canvasName).getContext("2d");
-			    window.myLine = new Chart(ctx).Line(standardData, {
-				    responsive: true,
-                    maintainAspectRatio: false,
-				    pointDot : true,
-				    showTooltips: true,
-				    bezierCurve : true,
-				    scaleLineWidth: 5,
-				    datasetStrokeWidth : 2,
-				    pointDotStrokeWidth : 1,
-				    scaleLabel: "<%=value%>",			    
-                 });
-            }
-			
-			// Set event
-			$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                var target = $(e.target).attr("tag") // get id of canvas from 'tag' attribute
-                loadChart(target);
-            });
-			
-			// Onload
-			// Load Weight chart
-			window.onload = loadChart("canvasWeight");
+      var randomScalingFactor = function(){ return Math.round(Math.random())};
+      var standardData = {
+      labels : ["0","1","2","3","4","5","6","7","8","9","10","11","12","13"],
+      datasets : [
+      {
+      label: "-3SD",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "rgba(220,220,220,1)",
+      pointColor : "rgba(220,220,220,1)",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "rgba(220,220,220,1)",
+      data : [44.2,45.4,46.6,47.6,48.6,49.5,50.3,51.1,51.9,52.6,53.3,54,54.7,55.3]
+      },
+      {
+      label: "-2SD",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "rgba(220,220,220,1)",
+      pointColor : "rgba(220,220,220,1)",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "rgba(220,220,220,1)",
+      data : [46.1,47.3,48.5,49.5,50.5,51.4,52.3,53.1,53.9,54.6,55.4,56,56.7,57.3]
+      },
+      {
+      label: "-1SD",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "rgba(220,220,220,1)",
+      pointColor : "rgba(220,220,220,1)",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "rgba(220,220,220,1)",
+      data : [48,49.2,50.4,51.5,52.4,53.4,54.3,55.1,55.9,56.6,57.4,58.1,58.7,59.4]
+      },
+      {
+      label: "Med",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "rgba(220,220,220,1)",
+      pointColor : "rgba(220,220,220,1)",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "rgba(220,220,220,1)",
+      data : [49.9,51.1,52.3,53.4,54.4,55.3,56.2,57.1,57.9,58.7,59.4,60.1,60.8,61.4]
+      },
+      {
+      label: "1SD",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "rgba(220,220,220,1)",
+      pointColor : "rgba(220,220,220,1)",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "rgba(220,220,220,1)",
+      data : [51.8,53,54.3,55.3,56.3,57.3,58.2,59.1,59.9,60.7,61.4,62.1,62.8,63.4]
+      },
+      {
+      label: "2SD",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "rgba(220,220,220,1)",
+      pointColor : "rgba(220,220,220,1)",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "rgba(220,220,220,1)",
+      data : [53.7,54.9,56.2,57.2,58.3,59.2,60.2,61,61.9,62.7,63.4,64.1,64.8,65.5]
+      },
+      {
+      label: "3SD",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "rgba(220,220,220,1)",
+      pointColor : "rgba(220,220,220,1)",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "rgba(220,220,220,1)",
+      data : [55.6,56.8,58.1,59.2,60.2,61.2,62.1,63,63.9,64.7,65.4,66.2,66.9,67.5]
+      },
+      {
+      label: "Your Kid",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "#F7464A",
+      pointColor : "#F7464A",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "#F7464A",
+      data : [randomScalingFactor()+49.9,
+      randomScalingFactor()+51.1,
+      randomScalingFactor()+52.3,
+      randomScalingFactor()+53.4,
+      randomScalingFactor()+54.4,
+      randomScalingFactor()+55.3,
+      randomScalingFactor()+56.2,
+      randomScalingFactor()+57.1,
+      randomScalingFactor()+57.9,
+      randomScalingFactor()+58.7,
+      randomScalingFactor()+59.4,
+      randomScalingFactor()+60.1,
+      randomScalingFactor()+60.8,
+      randomScalingFactor()+61.4]
+      }
+      ]
+      }
+
+      // Methods
+      function loadChart(canvasName){
+      var ctx = document.getElementById(canvasName).getContext("2d");
+      window.myLine = new Chart(ctx).Line(standardData, {
+      responsive: true,
+      maintainAspectRatio: false,
+      pointDot : true,
+      showTooltips: true,
+      bezierCurve : true,
+      scaleLineWidth: 5,
+      datasetStrokeWidth : 2,
+      pointDotStrokeWidth : 1,
+      scaleLabel: "<%=value%>",
+      });
+      }
+
+      // Set event
+      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      var target = $(e.target).attr("tag") // get id of canvas from 'tag' attribute
+      loadChart(target);
+      });
+
+      // Onload
+      // Load Weight chart
+      window.onload = loadChart("canvasWeight");
+
+      $("body").css("display", "none");
+      $("body").show(500);
+
+      function getQueryParams(qs) {
+      qs = qs.split('+').join(' ');
+
+      var params = {},
+      tokens,
+      re = /[?&]?([^=]+)=([^&]*)/g;
+
+      while (tokens = re.exec(qs)) {
+      params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+      }
+
+      return params;
+      }
+
+      var query = getQueryParams(document.location.search);
+
+      initializeMasterData();
+      loadDataToMenu();
+      loadDataToChart(query.id);
     </script>
-</body>
+  </body>
 </html>

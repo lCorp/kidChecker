@@ -1,71 +1,70 @@
 <!doctype html>
 <html>
-<head>
+  <head>
     <!--Standard Meta -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>kidChecker</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<script src="js/index.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <title>Kid Checker</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+    <script src="js/index.js"></script>
     <script src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/semantic.min.css" />
     <link rel="stylesheet" type="text/css" href="css/docs.css" />
     <script src="js/semantic.min.js"></script>
     <script type="text/javascript">
-        $(function () {
-            // using context
-            $('.context.example .ui.sidebar').sidebar({
-                context: $('.context.example .bottom.segment')
-            }).sidebar('attach events', '.context.example .menu .item');
-        });
-    	</script>
-</head>
-<body>
+      $(function () {
+      // using context
+      $('.context.example .ui.sidebar').sidebar({
+      context: $('.context.example .bottom.segment')
+      }).sidebar('attach events', '.context.example .menu .item');
+      });
+    </script>
+  </head>
+  <body>
     <div class="context example" style="height: 92.3%">
-        <div class="ui top attached demo menu">
-            <a class="item"><i class="sidebar icon"></i></a>
-            <div style="padding: .92857143em 1.14285714em;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                Kid Checker
-            </div>
+      <div class="ui top attached demo menu">
+        <a class="item">
+          <i class="sidebar icon"></i>
+        </a>
+        <div style="padding: .92857143em 1.14285714em;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+          Kid Checker
         </div>
-        <div class="ui bottom attached segment pushable">
-            <div class="ui inverted labeled icon left inline vertical sidebar menu">
-                <a id="manageChildrenLink" style="text-align: left;" class="item" href="index.html"><span class="glyphicon glyphicon-align-justify">
-                </span>&nbsp;&nbsp;&nbsp; Manage Children </a>
-				
-            </div>
-            <div class="pusher">
-                <div class="ui basic segment">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Welcome back, choose your child :</div>
-                        <div style="padding: 30px;" class="panel-body row">
-                            <button style="margin-bottom: 10px; text-align: left;" type="button" class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                John <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-                            </button>
-                            <button style="margin-bottom: 10px; text-align: left;" type="button" class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                Anna Loc <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-                            </button>
-                            <button style="margin-bottom: 10px; text-align: left;" type="button" class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                Lucy Loc <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-                            </button>
-                        </div>
-                    </div>
-                    <div style="padding: 15px" class="row form-group">
-                        <button style="" type="button" class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp; Add new child profile
-                        </button>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="ui bottom attached segment pushable">
+        <div class="ui inverted labeled icon left inline vertical sidebar menu">
+          <a id="manageChildrenLink" style="text-align: left;" class="item" href="index.html">
+            <span class="glyphicon glyphicon-align-justify">
+            </span>&nbsp;&nbsp;&nbsp; Manage Children
+          </a>
         </div>
-		
-		<script type="text/javascript">
-          initializeMasterData();
-          loadDataToMenu();
-    	</script>
-</body>
+        <div class="pusher">
+          <div class="ui basic segment">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                Welcome back, choose your child :
+              </div>
+              <div id="listChildren" style="padding: 30px;" class="panel-body row">
+              </div>
+            </div>
+            <div style="padding: 15px" class="row form-group">
+              <button style="" type="button" class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp; Add new child profile
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+        $("body").css("display", "none");
+        $("body").show(500);
+        
+        initializeMasterData();
+        loadDataToMenu();
+        loadDataToIndex();
+      </script>
+    </body>
 </html>
