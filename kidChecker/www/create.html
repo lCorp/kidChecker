@@ -71,13 +71,16 @@
                         </td>
                         <td id="birthday">
                           <div class="input-group bootstrap-timepicker timepicker">
-                            <input id="timePicker" type="text" value="1991/06/14" class="form-control"/>
+                            <input id="timePicker" type="text" value="" placeholder="yyyy/MM/dd" class="form-control"/>
                             <span class="input-group-addon">
                               <i class="glyphicon glyphicon-calendar"></i>
                             </span>
                             <script type="text/javascript">
+                              var today = new Date();
                               $('#timePicker').datepicker({
-                                format: "yyyy/MM/dd"
+                              format: "yyyy/MM/dd",
+                              startDate: new Date(today.getFullYear() - 5,12,1),
+                              endDate: today
                               });
                             </script>
                           </div>
