@@ -136,7 +136,7 @@ function loadDataToDetail(idChild) {
 		];
 
 	db.transaction(function (tx) {
-        tx.executeSql("SELECT * FROM MEASUREMENT", [], function (tx, result) {
+        tx.executeSql("SELECT * FROM MEASUREMENT WHERE idChild="+idChild+" ORDER BY measurementDate", [], function (tx, result) {
           
             var len = result.rows.length;
 			console.log('idChild: ' + idChild);
@@ -152,7 +152,7 @@ function loadDataToDetail(idChild) {
 				dddName = "kaka";
 				dddName = days[new Date(date).getDay()];
 
-				var measurementItem = "<div style='height: 55px' class='panel-heading'>";
+				var measurementItem = "<div style='height: 55px;' class='panel-heading'>";
                 measurementItem += dddName + date;
                 measurementItem += "<button style='' type='button' class='btn pull-right'>";
                 measurementItem += "<span class='glyphicon glyphicon-edit'></span>";
@@ -185,7 +185,6 @@ function loadDataToChart(idChild) {
                 var row = result.rows.item(index);
                 childId = row.id;
                 childName = row.childName;
-				birthday = row.birthday;
 				sex = row.sex;
 
 				var btnEdit = "<button type='button' class='btn pull-right' onclick='location.href=\"detail.html?id="+ childId +"\"'><span class='glyphicon glyphicon-edit pull-right'></span></button>";
@@ -193,11 +192,17 @@ function loadDataToChart(idChild) {
 				$('title').html(childName + "'s chart");
 
 				$('#titleName').html("");
-				$('#titleName').append(childName);
+				$('#titleName').append(childName + " ("+sex+")");
 				$('#titleName').append(btnEdit);
+				$('#sexValue').val(sex);
             };
         }, null);
     });
+}
+
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 
 function createChildProfile(nameInput, birthdayInput, sexInput) {
@@ -205,7 +210,7 @@ function createChildProfile(nameInput, birthdayInput, sexInput) {
 
     // CHILDREN ADD NEW
     db.transaction(function (tx) {
-        tx.executeSql('INSERT INTO CHILDREN (childName, birthday, sex) VALUES (?, ?, ?)', [nameInput, birthdayInput, sexInput]);
+        tx.executeSql('INSERT INTO CHILDREN (childName, birthday, sex) VALUES (?, ?, ?)', [toTitleCase(nameInput), birthdayInput, sexInput]);
     });
 }
 
@@ -219,31 +224,30 @@ function deleteChildProfile(idChild) {
 }
 
 
+
 function addMeasurement(weightValue, heightValue, headValue, measurementDate, idChild){
 	var db = openDatabase('kidChecker', '1.0', 'Database for kidChecker', 5 * 1024 * 1024);
 
     // MEASUREMENT ADD NEW
     db.transaction(function (tx) {
-        tx.executeSql('INSERT INTO MEASUREMENT (weight, height, head, measurementDate, idChild) VALUES (?, ?, ?, ?, ?)', [weightValue, heightValue, headValue, measurementDate, idChild]);
+        tx.executeSql('INSERT INTO MEASUREMENT (weight, height, head, measurementDate, idChild) VALUES (?, ?, ?, ?, ?)', [weightValue, heightValue, headValue, measurementDate, parseInt(idChild, 10)]);
     });
 
 }
+
 
 
 function initializeMasterData() {
     var db = openDatabase('kidChecker', '1.0', 'Database for kidChecker', 5 * 1024 * 1024);
 
     // CHILDREN
-    db.transaction(function (tx) { 
+    db.transaction(function (tx) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS CHILDREN (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, childName, birthday, sex)');
     });
 
 	// MEASUREMENT
     db.transaction(function (tx) {
-		tx.executeSql('DROP TABLE IF EXISTS MEASUREMENT');
         tx.executeSql('CREATE TABLE IF NOT EXISTS MEASUREMENT (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, weight, height, head, measurementDate, idChild)');
-		tx.executeSql('INSERT INTO MEASUREMENT (weight, height, head, measurementDate, idChild) VALUES (?, ?, ?, ?, ?)', [11, 12, 13, 2015/10/01, 5]);
-		tx.executeSql('INSERT INTO MEASUREMENT (weight, height, head, measurementDate, idChild) VALUES (?, ?, ?, ?, ?)', [21, 22, 23, 2015/10/02, 6]);
     });
 }
 

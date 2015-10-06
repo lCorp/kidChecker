@@ -31,6 +31,7 @@
     </script>
   </head>
   <body>
+  <input id="sexValue" type="hidden" />
     <div class="context" style="height:92.3%">
       <div class="ui top attached demo menu">
         <a class="item">
@@ -101,7 +102,8 @@
       // Define data
 
       var randomScalingFactor = function(){ return Math.round(Math.random())};
-      var standardData = {
+	  
+      var standarWeightBoyData = {
       labels : ["0","1","2","3","4","5","6","7","8","9","10","11","12","13"],
       datasets : [
       {
@@ -112,7 +114,7 @@
       pointStrokeColor : "#fff",
       pointHighlightFill : "#fff",
       pointHighlightStroke : "rgba(220,220,220,1)",
-      data : [44.2,45.4,46.6,47.6,48.6,49.5,50.3,51.1,51.9,52.6,53.3,54,54.7,55.3]
+      data : [2.1,2.2,2.4,2.6,2.9,3.1,3.3,3.5,3.7,3.8,4.0,4.2,4.3,4.4]
       },
       {
       label: "-2SD",
@@ -122,7 +124,7 @@
       pointStrokeColor : "#fff",
       pointHighlightFill : "#fff",
       pointHighlightStroke : "rgba(220,220,220,1)",
-      data : [46.1,47.3,48.5,49.5,50.5,51.4,52.3,53.1,53.9,54.6,55.4,56,56.7,57.3]
+      data : [2.5,2.6,2.8,3.1,3.3,3.5,3.8,4.0,4.2,4.4,4.5,4.7,4.9,5.0]
       },
       {
       label: "-1SD",
@@ -132,7 +134,7 @@
       pointStrokeColor : "#fff",
       pointHighlightFill : "#fff",
       pointHighlightStroke : "rgba(220,220,220,1)",
-      data : [48,49.2,50.4,51.5,52.4,53.4,54.3,55.1,55.9,56.6,57.4,58.1,58.7,59.4]
+      data : [2.9,3.0,3.2,3.5,3.8,4.1,4.3,4.6,4.8,5.0,5.2,5.3,5.5,5.7]
       },
       {
       label: "Med",
@@ -142,7 +144,7 @@
       pointStrokeColor : "#fff",
       pointHighlightFill : "#fff",
       pointHighlightStroke : "rgba(220,220,220,1)",
-      data : [49.9,51.1,52.3,53.4,54.4,55.3,56.2,57.1,57.9,58.7,59.4,60.1,60.8,61.4]
+      data : [3.3,3.5,3.8,4.1,4.4,4.7,4.9,5.2,5.4,5.6,5.8,6.0,6.2,6.4]
       },
       {
       label: "1SD",
@@ -152,7 +154,7 @@
       pointStrokeColor : "#fff",
       pointHighlightFill : "#fff",
       pointHighlightStroke : "rgba(220,220,220,1)",
-      data : [51.8,53,54.3,55.3,56.3,57.3,58.2,59.1,59.9,60.7,61.4,62.1,62.8,63.4]
+      data : [3.9,4.0,4.3,4.7,5.0,5.3,5.6,5.9,6.1,6.4,6.6,6.8,7.0,7.2]
       },
       {
       label: "2SD",
@@ -162,7 +164,7 @@
       pointStrokeColor : "#fff",
       pointHighlightFill : "#fff",
       pointHighlightStroke : "rgba(220,220,220,1)",
-      data : [53.7,54.9,56.2,57.2,58.3,59.2,60.2,61,61.9,62.7,63.4,64.1,64.8,65.5]
+      data : [4.4,4.6,4.9,5.3,5.7,6.0,6.3,6.6,6.9,7.2,7.4,7.6,7.8,8.0]
       },
       {
       label: "3SD",
@@ -172,7 +174,7 @@
       pointStrokeColor : "#fff",
       pointHighlightFill : "#fff",
       pointHighlightStroke : "rgba(220,220,220,1)",
-      data : [55.6,56.8,58.1,59.2,60.2,61.2,62.1,63,63.9,64.7,65.4,66.2,66.9,67.5]
+      data : [5.0,5.3,5.6,6.0,6.4,6.8,7.2,7.5,7.8,8.0,8.3,8.5,8.8,9.0]
       },
       {
       label: "Your Kid",
@@ -182,49 +184,156 @@
       pointStrokeColor : "#fff",
       pointHighlightFill : "#fff",
       pointHighlightStroke : "#F7464A",
-      data : [randomScalingFactor()+49.9,
-      randomScalingFactor()+51.1,
-      randomScalingFactor()+52.3,
-      randomScalingFactor()+53.4,
-      randomScalingFactor()+54.4,
-      randomScalingFactor()+55.3,
-      randomScalingFactor()+56.2,
-      randomScalingFactor()+57.1,
-      randomScalingFactor()+57.9,
-      randomScalingFactor()+58.7,
-      randomScalingFactor()+59.4,
-      randomScalingFactor()+60.1,
-      randomScalingFactor()+60.8,
-      randomScalingFactor()+61.4]
+      data : [randomScalingFactor()+3.3,
+      randomScalingFactor()+3.5,
+      randomScalingFactor()+3.8,
+      randomScalingFactor()+4.1,
+      randomScalingFactor()+4.4,
+      randomScalingFactor()+4.7,
+      randomScalingFactor()+4.9,
+      randomScalingFactor()+5.2,
+      randomScalingFactor()+5.4,
+      randomScalingFactor()+5.6,
+      randomScalingFactor()+5.8,
+      randomScalingFactor()+6.0,
+      randomScalingFactor()+6.2,
+	  randomScalingFactor()+6.4]
       }
       ]
       }
 
+	  var standarWeightGirlData = {
+      labels : ["0","1","2","3","4","5","6","7","8","9","10","11","12","13"],
+      datasets : [
+      {
+      label: "-3SD",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "rgba(220,220,220,1)",
+      pointColor : "rgba(220,220,220,1)",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "rgba(220,220,220,1)",
+      data : [2.0,2.1,2.3,2.5,2.7,2.9,3.0,3.2,3.3,3.5,3.6,3.8,3.9,4.0]
+      },
+      {
+      label: "-2SD",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "rgba(220,220,220,1)",
+      pointColor : "rgba(220,220,220,1)",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "rgba(220,220,220,1)",
+      data : [2.4,2.5,2.7,2.9,3.1,3.3,3.5,3.7,3.8,4.0,4.1,4.3,4.4,4.5]
+      },
+      {
+      label: "-1SD",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "rgba(220,220,220,1)",
+      pointColor : "rgba(220,220,220,1)",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "rgba(220,220,220,1)",
+      data : [2.8,2.9,3.1,3.3,3.6,3.8,4.0,4.2,4.4,4.6,4.7,4.9,5.0,5.1]
+      },
+      {
+      label: "Med",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "rgba(220,220,220,1)",
+      pointColor : "rgba(220,220,220,1)",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "rgba(220,220,220,1)",
+      data : [3.2,3.3,3.6,3.8,4.1,4.3,4.6,4.8,5.0,5.2,5.4,5.5,5.7,5.8]
+      },
+      {
+      label: "1SD",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "rgba(220,220,220,1)",
+      pointColor : "rgba(220,220,220,1)",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "rgba(220,220,220,1)",
+      data : [3.7,3.9,4.1,4.4,4.7,5.0,5.2,5.5,5.7,5.9,6.1,6.3,6.5,6.6]
+      },
+      {
+      label: "2SD",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "rgba(220,220,220,1)",
+      pointColor : "rgba(220,220,220,1)",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "rgba(220,220,220,1)",
+      data : [4.2,4.4,4.7,5.0,5.4,5.7,6.0,6.2,6.5,6.7,6.9,7.1,7.3,7.5]
+      },
+      {
+      label: "3SD",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "rgba(220,220,220,1)",
+      pointColor : "rgba(220,220,220,1)",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "rgba(220,220,220,1)",
+      data : [4.8,5.1,5.4,5.7,6.1,6.5,6.8,7.1,7.3,7.6,7.8,8.1,8.3,8.5]
+      },
+      {
+      label: "Your Kid",
+      fillColor : "rgba(0,0,0,0)",
+      strokeColor : "#F7464A",
+      pointColor : "#F7464A",
+      pointStrokeColor : "#fff",
+      pointHighlightFill : "#fff",
+      pointHighlightStroke : "#F7464A",
+      data : [randomScalingFactor()+3.3,
+      randomScalingFactor()+3.5,
+      randomScalingFactor()+3.8,
+      randomScalingFactor()+4.1,
+      randomScalingFactor()+4.4,
+      randomScalingFactor()+4.7,
+      randomScalingFactor()+4.9,
+      randomScalingFactor()+5.2,
+      randomScalingFactor()+5.4,
+      randomScalingFactor()+5.6,
+      randomScalingFactor()+5.8,
+      randomScalingFactor()+6.0,
+      randomScalingFactor()+6.2,
+	  randomScalingFactor()+6.4]
+      }
+      ]
+      }
+	  
       // Methods
-      function loadChart(canvasName){
-      var ctx = document.getElementById(canvasName).getContext("2d");
-      window.myLine = new Chart(ctx).Line(standardData, {
-      responsive: true,
-      maintainAspectRatio: false,
-      pointDot : true,
-      showTooltips: true,
-      bezierCurve : true,
-      scaleLineWidth: 5,
-      datasetStrokeWidth : 2,
-      pointDotStrokeWidth : 1,
-      scaleLabel: "<%=value%>",
-      });
+      function loadChart(canvasName, sex){
+        var ctx = document.getElementById(canvasName).getContext("2d");
+  	  
+   	    if(sex == "Boy"){
+     	  window.myLine = new Chart(ctx).Line(standarWeightBoyData, {
+          responsive: true,
+          maintainAspectRatio: false,
+          pointDot : true,
+          showTooltips: true,
+          bezierCurve : false,
+          scaleLineWidth: 5,
+          datasetStrokeWidth : 2,
+          pointDotStrokeWidth : 1,
+          scaleLabel: "<%=value%>",
+          });
+  	    }
+  	    else{
+    	  window.myLine = new Chart(ctx).Line(standarWeightGirlData, {
+          responsive: true,
+          maintainAspectRatio: false,
+          pointDot : true,
+          showTooltips: true,
+          bezierCurve : false,
+          scaleLineWidth: 5,
+          datasetStrokeWidth : 2,
+          pointDotStrokeWidth : 1,
+          scaleLabel: "<%=value%>",
+          });
+  	    }
       }
 
-      // Set event
-      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-      var target = $(e.target).attr("tag") // get id of canvas from 'tag' attribute
-      loadChart(target);
-      });
-
-      // Onload
-      // Load Weight chart
-      window.onload = loadChart("canvasWeight");
+      
 
       $("body").css("display", "none");
       $("body").show(500);
@@ -245,9 +354,21 @@
 
       var query = getQueryParams(document.location.search);
       
-      
-      loadDataToMenu();
-      loadDataToChart(query.id);
+      $(document).ready(function(){
+  	     loadDataToMenu();
+         loadDataToChart(query.id);
+		 
+		 // Set event
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var target = $(e.target).attr("tag") // get id of canvas from 'tag' attribute
+        loadChart(target, $('#sexValue').val());
+        });
+		
+		setTimeout(function(){
+              loadChart("canvasWeight", $('#sexValue').val());
+            }, 1000);
+	  });
+	  
     </script>
   </body>
 </html>
