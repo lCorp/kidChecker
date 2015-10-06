@@ -16,23 +16,22 @@
     <link rel="stylesheet" type="text/css" href="css/docs.css" />
     <script src="js/semantic.min.js"></script>
     <style>
-      .nav-justified > li > a
-      {
-      width: 100%;
-      margin-bottom: 10px;
+      .nav li {
+      display:table-cell !important;
+      width: 1%;
       }
     </style>
     <script type="text/javascript">
       $(function () {
       // using context
-      $('.context.example .ui.sidebar').sidebar({
-      context: $('.context.example .bottom.segment')
-      }).sidebar('attach events', '.context.example .menu .item');
+      $('.context .ui.sidebar').sidebar({
+      context: $('.context .bottom.segment')
+      }).sidebar('attach events', '.context .menu .item');
       });
     </script>
   </head>
   <body>
-    <div class="context example" style="height: 92.3%">
+    <div class="context" style="height:92.3%">
       <div class="ui top attached demo menu">
         <a class="item">
           <i class="sidebar icon"></i>
@@ -54,22 +53,22 @@
         <div class="pusher" style="height: 100%">
           <div class="ui basic segment" style="height: 100%">
             <ul class="nav nav-pills nav-justified">
-              <li class="active">
-                <a data-toggle="tab" href="#Weight" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" tag="canvasWeight">
+              <li title="canvasWeight" class="active col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <a data-toggle="tab" href="#Weight" tag="canvasWeight">
                   <span class="glyphicon glyphicon-download-alt"></span>
                   <br />
                   Weight
                 </a>
               </li>
-              <li title="canvasHeight">
-                <a data-toggle="tab" href="#Height" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" tag="canvasHeight">
+              <li title="canvasHeight"  class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <a data-toggle="tab" href="#Height" tag="canvasHeight">
                   <span class="glyphicon glyphicon-stats"></span>
                   <br />
                   Height
                 </a>
               </li>
-              <li title="canvasHead">
-                <a data-toggle="tab" href="#Head" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" tag="canvasHead">
+              <li title="canvasHead"  class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <a data-toggle="tab" href="#Head" tag="canvasHead">
                   <span
                             class="glyphicon glyphicon-user"></span>
                   <br />
@@ -77,27 +76,18 @@
                 </a>
               </li>
             </ul>
-            <div class="tab-content" style="height: 100%">
+            <div class="tab-content" style="height: 100%; margin-top:10px;">
               <div id="Weight" class="tab-pane fade in active" style="height: 100%">
-                <h3>
-                  Weight
-                </h3>
                 <div style="width: 90%; height: 80%; margin-left: auto; margin-right: auto;">
                   <canvas id="canvasWeight" style="height: 100%"></canvas>
                 </div>
               </div>
               <div id="Height" class="tab-pane fade" style="height: 100%">
-                <h3>
-                  Height
-                </h3>
                 <div style="width: 90%; height: 80%; margin-left: auto; margin-right: auto;">
                   <canvas id="canvasHeight" style="height: 100%"></canvas>
                 </div>
               </div>
               <div id="Head" class="tab-pane fade" style="height: 100%">
-                <h3>
-                  Head
-                </h3>
                 <div style="width: 90%; height: 80%; margin-left: auto; margin-right: auto;">
                   <canvas id="canvasHead" style="height: 100%"></canvas>
                 </div>
@@ -254,8 +244,8 @@
       }
 
       var query = getQueryParams(document.location.search);
-
-      initializeMasterData();
+      
+      
       loadDataToMenu();
       loadDataToChart(query.id);
     </script>

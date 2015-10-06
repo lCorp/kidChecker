@@ -16,17 +16,18 @@
     <link rel="stylesheet" type="text/css" href="css/semantic.min.css" />
     <link rel="stylesheet" type="text/css" href="css/docs.css" />
     <script src="js/semantic.min.js"></script>
+
     <script type="text/javascript">
       $(function () {
       // using context
-      $('.context.example .ui.sidebar').sidebar({
-      context: $('.context.example .bottom.segment')
-      }).sidebar('attach events', '.context.example .menu .item');
+      $('.context .ui.sidebar').sidebar({
+      context: $('.context .bottom.segment')
+      }).sidebar('attach events', '.context .menu .item');
       });
     </script>
   </head>
   <body>
-    <div class="context example">
+    <div class="context">
       <div class="ui top attached demo menu">
         <a class="item">
           <i class="sidebar icon"></i>
@@ -66,97 +67,124 @@
                       Born on
                     </td>
                     <td id="birthday">
-                      <div class="input-group bootstrap-timepicker timepicker">
-                        <input id="timePicker" type="text" value="1991/06/14" class="form-control"/>
-                        <span class="input-group-addon">
-                          <i class="glyphicon glyphicon-calendar"></i>
-                        </span>
-                        <script type="text/javascript">
-                          $('#timePicker').datepicker({
-                          format: "yyyy/MM/dd"
-                          });
-                        </script>
-                      </div>
+                      undefine
                     </td>
                   </tr>
                   <tr>
                     <td>
                       Sex
                     </td>
-                    <td>
-                      <select id="sex" class="form-control">
-                        <option selected="selected">Boy</option>
-                        <option>Girl</option>
-                      </select>
+                    <td id="sex">
                     </td>
                   </tr>
                 </table>
+                <button style="" type="button" class="btn pull-right" data-toggle="modal" data-target="#confirmPopup">
+                  <span class="glyphicon glyphicon-remove pull-right" style="color:red"></span>
+                </button>
               </div>
             </div>
             <div style="padding: 15px" class="row form-group">
-              <button style="" type="button" class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <button style="" type="button" class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12" data-toggle="modal" data-target="#addNewMeasurementPopup">
                 <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp; New measurement
               </button>
             </div>
-            <div class="panel panel-default">
-              <div style="height: 55px" class="panel-heading">
-                Sun, 2015/09/13
-                <button style="" type="button" class="btn pull-right">
-                  <span class="glyphicon glyphicon-edit"></span>
-                </button>
-              </div>
-              <div class="panel-body">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;&nbsp; 3.50 kg
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;&nbsp; 57 cm
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp; 35 cm
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div style="height: 55px" class="panel-heading">
-                Sat, 2015/09/12
-                <button style="" type="button" class="btn pull-right">
-                  <span class="glyphicon glyphicon-edit"></span>
-                </button>
-              </div>
-              <div class="panel-body">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;&nbsp; 3.50 kg
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;&nbsp; 57 cm
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp; 35 cm
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div style="height: 55px" class="panel-heading">
-                Fri, 2015/09/13
-                <button style="" type="button" class="btn pull-right">
-                  <span class="glyphicon glyphicon-edit"></span>
-                </button>
-              </div>
-              <div class="panel-body">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;&nbsp; 3.50 kg
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;&nbsp; 57 cm
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp; 35 cm
-                </div>
-              </div>
+            <div id="measurementList" class="panel panel-default">
+              
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div id="confirmPopup" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Do you confirm to delete this child's profile?</h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" onclick="doDelete();">Yes</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="addNewMeasurementPopup" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Input measurement</h4>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered">
+              <tr>
+                <td style="width:50%">
+                  Weight
+                </td>
+                <td>
+                  <input type="number" min="1" max="30" class="form-control" id="weightInput" placeholder="Kg"/>
+                  <lable id="weightInputAlert" style="color:red; display:none;">&nbsp;&nbsp;*Required</lable>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Height
+                </td>
+                <td>
+                  <input type="number" min="1" max="150" class="form-control" id="heightInput" placeholder="Cm"/>
+                  <lable id="heightInputAlert" style="color:red; display:none;">&nbsp;&nbsp;*Required</lable>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Head
+                </td>
+                <td>
+                  <input type="number" min="1" max="30" class="form-control" id="headInput" placeholder="Cm"/>
+                  <lable id="headInputAlert" style="color:red; display:none;">&nbsp;&nbsp;*Required</lable>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Measurement date
+                </td>
+                <td>
+                  <div class="input-group bootstrap-timepicker timepicker">
+                    <input id="timePicker" type="text" value="" placeholder="yyyy/MM/dd" class="form-control"/>
+                    <span class="input-group-addon">
+                      <i class="glyphicon glyphicon-calendar"></i>
+                    </span>
+                    <script type="text/javascript">
+                      var today = new Date();
+                      $('#timePicker').datepicker({
+                      format: "yyyy/mm/dd",
+                      startDate: new Date(today.getFullYear() - 2,12,1),
+                      endDate: today
+                      });
+                    </script>
+                  </div>
+                  <lable id="measurementDateAlert" style="color:red; display:none;">&nbsp;&nbsp;*Required</lable>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" onclick="doAddMeasurement();">Submit</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -181,9 +209,71 @@
 
       var query = getQueryParams(document.location.search);
 
-      initializeMasterData();
-      loadDataToMenu();
-      loadDataToDetail(query.id);
-    </script>
+      function doDelete(){
+      deleteChildProfile(query.id);
+      location.href = "index.html";
+      }
+
+
+      function checkInput(weightValue, heightValue, headValue, timePicker){
+      var stopFlag = false;
+
+      if(weightValue == "" || weightValue <= 0){
+      $("#weightInputAlert").fadeIn(500);
+      stopFlag = true;
+      }
+      else
+      {
+      $("#weightInputAlert").fadeOut(500);
+      }
+
+      if(heightValue == "" || heightValue <= 0){
+      $("#heightInputAlert").fadeIn(500);
+      stopFlag = true;
+      }
+      else
+      {
+      $("#heightInputAlert").fadeOut(500);
+      }
+
+      if(headValue == "" || headValue <= 0){
+        $("#headInputAlert").fadeIn(500);
+        stopFlag = true;
+        }
+        else
+        {
+        $("#headInputAlert").fadeOut(500);
+        }
+
+        if(timePicker == ""){
+        $("#measurementDateAlert").fadeIn(500);
+        stopFlag = true;
+        }
+        else
+        {
+        $("#measurementDateAlert").fadeOut(500);
+        }
+
+        return !stopFlag;
+        }
+
+        function doAddMeasurement(){
+        var weightValue = $("#weightInput").val();
+        var heightValue = $("#heightInput").val();
+        var headValue = $("#headInput").val();
+        var timePicker = $("#timePicker").val();
+
+        if(checkInput(weightValue, heightValue, headValue,timePicker) == true){
+
+        addMeasurement(weightValue, heightValue, headValue, timePicker, query.id);
+
+        location.href = "detail.html?id=" + query.id;
+        }
+        }
+
+        loadDataToMenu();
+        loadDataToDetail(query.id);
+
+      </script>
   </body>
 </html>

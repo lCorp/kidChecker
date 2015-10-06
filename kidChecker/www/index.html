@@ -17,14 +17,14 @@
     <script type="text/javascript">
       $(function () {
       // using context
-      $('.context.example .ui.sidebar').sidebar({
-      context: $('.context.example .bottom.segment')
-      }).sidebar('attach events', '.context.example .menu .item');
+      $('.context .ui.sidebar').sidebar({
+      context: $('.context .bottom.segment')
+      }).sidebar('attach events', '.context .menu .item');
       });
     </script>
   </head>
   <body>
-    <div class="context example" style="height: 92.3%">
+    <div class="context">
       <div class="ui top attached demo menu">
         <a class="item">
           <i class="sidebar icon"></i>

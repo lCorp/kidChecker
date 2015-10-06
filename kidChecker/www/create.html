@@ -19,23 +19,20 @@
     <script type="text/javascript">
       $(function () {
       // using context
-      $('.context.example .ui.sidebar').sidebar({
-      context: $('.context.example .bottom.segment')
-      }).sidebar('attach events', '.context.example .menu .item');
+      $('.context .ui.sidebar').sidebar({
+      context: $('.context .bottom.segment')
+      }).sidebar('attach events', '.context .menu .item');
       });
     </script>
   </head>
   <body>
-    <div class="context example">
+    <div class="context">
       <div class="ui top attached demo menu">
         <a class="item">
           <i class="sidebar icon"></i>
         </a>
         <div id="titleName" style="padding: .92857143em 1.14285714em;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
           Add new child profile
-          <button style="" type="button" class="btn pull-right" onclick="location.href='chart.html';">
-            <span class="glyphicon glyphicon-equalizer pull-right"></span>
-          </button>
         </div>
       </div>
       <div class="ui bottom attached segment pushable">
@@ -49,120 +46,63 @@
           <div class="ui basic segment">
             <div class="panel panel-default">
               <div class="panel-heading">
-                About your child
+                Input your child's information
               </div>
               <div class="panel-body">
-                <form>
-                  <table class="table table-bordered">
-                    <tr>
-                      <div class="form-group">
-                        <td style="width:50%">
-                          Name
-                        </td>
-                        <td id="childName">
-                          <input type="text" class="form-control" id="chilNameInput" data-fv-validatorname="true" placeholder="Child name"/>
-                        </td>
-                      </div>
-                    </tr>
-                    <tr>
-                      <div class="form-group">
-                        <td>
-                          Born on
-                        </td>
-                        <td id="birthday">
-                          <div class="input-group bootstrap-timepicker timepicker">
-                            <input id="timePicker" type="text" value="" placeholder="yyyy/MM/dd" class="form-control"/>
-                            <span class="input-group-addon">
-                              <i class="glyphicon glyphicon-calendar"></i>
-                            </span>
-                            <script type="text/javascript">
-                              var today = new Date();
-                              $('#timePicker').datepicker({
-                              format: "yyyy/MM/dd",
-                              startDate: new Date(today.getFullYear() - 5,12,1),
-                              endDate: today
-                              });
-                            </script>
-                          </div>
-                        </td>
-                      </div>
-                    </tr>
-                    <tr>
-                      <td>
-                        Sex
+                <table class="table table-bordered">
+                  <tr>
+                    <div class="form-group">
+                      <td style="width:50%">
+                        Name
                       </td>
                       <td>
-                        <select id="sex" class="form-control">
-                          <option selected="selected">Boy</option>
-                          <option>Girl</option>
-                        </select>
+                        <input type="text" class="form-control" id="chilNameInput" data-fv-validatorname="true" placeholder="Child name" required/>
+                        <lable id="childNameAlert" style="color:red; display:none;">&nbsp;&nbsp;*Required</lable>
                       </td>
-                    </tr>
-                  </table>
-                </form>
+                    </div>
+                  </tr>
+                  <tr>
+                    <div class="form-group">
+                      <td>
+                        Born on
+                      </td>
+                      <td>
+                        <div class="input-group bootstrap-timepicker timepicker">
+                          <input id="timePicker" type="text" value="" placeholder="yyyy/MM/dd" class="form-control" required/>
+                          <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                          </span>
+                          <script type="text/javascript">
+                            var today = new Date();
+                            $('#timePicker').datepicker({
+                            format: "yyyy/mm/dd",
+                            startDate: new Date(today.getFullYear() - 5,12,1),
+                            endDate: today
+                            });
+                          </script>
+                        </div>
+                        <lable id="birthdayAlert" style="color:red; display:none;">&nbsp;&nbsp;*Required</lable>
+                      </td>
+                    </div>
+                  </tr>
+                  <tr>
+                    <td>
+                      Sex
+                    </td>
+                    <td>
+                      <select id="sex" class="form-control">
+                        <option selected="selected">Boy</option>
+                        <option>Girl</option>
+                      </select>
+                    </td>
+                  </tr>
+                </table>
               </div>
             </div>
             <div style="padding: 15px" class="row form-group">
-              <button style="" type="button" class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp; New measurement
+              <button onclick="addNewChild();" style="" type="button" class="btn btn-default col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp; Add
               </button>
-            </div>
-            <div class="panel panel-default">
-              <div style="height: 55px" class="panel-heading">
-                Sun, 2015/09/13
-                <button style="" type="button" class="btn pull-right">
-                  <span class="glyphicon glyphicon-edit"></span>
-                </button>
-              </div>
-              <div class="panel-body">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;&nbsp; 3.50 kg
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;&nbsp; 57 cm
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp; 35 cm
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div style="height: 55px" class="panel-heading">
-                Sat, 2015/09/12
-                <button style="" type="button" class="btn pull-right">
-                  <span class="glyphicon glyphicon-edit"></span>
-                </button>
-              </div>
-              <div class="panel-body">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;&nbsp; 3.50 kg
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;&nbsp; 57 cm
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp; 35 cm
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div style="height: 55px" class="panel-heading">
-                Fri, 2015/09/13
-                <button style="" type="button" class="btn pull-right">
-                  <span class="glyphicon glyphicon-edit"></span>
-                </button>
-              </div>
-              <div class="panel-body">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;&nbsp; 3.50 kg
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;&nbsp; 57 cm
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-                  <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp; 35 cm
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -190,9 +130,40 @@
 
       var query = getQueryParams(document.location.search);
 
-      initializeMasterData();
+      function checkInput(){
+      var stopFlag = false;
+
+      if($("#chilNameInput").val() == ""){
+      $("#childNameAlert").fadeIn(500);
+      stopFlag = true;
+      }
+      else
+      {
+      $("#childNameAlert").fadeOut(500);
+      }
+
+      if($("#timePicker").val() == ""){
+      $("#birthdayAlert").fadeIn(500);
+      stopFlag = true;
+      }
+      else
+      {
+      $("#birthdayAlert").fadeOut(500);
+      }
+
+      return !stopFlag;
+      }
+
+      function addNewChild(){
+      if(checkInput() == true){
+
+      createChildProfile($("#chilNameInput").val(), document.getElementById('timePicker').value, $("#sex").val());
+
+      location.href = "index.html";
+      }
+      }
+
       loadDataToMenu();
-      loadDataToDetail(query.id);
     </script>
   </body>
 </html>

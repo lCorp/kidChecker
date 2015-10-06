@@ -119,8 +119,53 @@ function loadDataToDetail(idChild) {
 				$('#titleName').append(childName);
 				$('#titleName').append(btnChart);
 				$('#childName').html(childName);
-				$('#birthday #timePicker').val(birthday);
-				$('#sex').val(sex);
+				$('#birthday').html(birthday);
+				$('#sex').html(sex);
+            };
+        }, null);
+    });
+
+	var days = [
+			'Sun, ', //Sunday starts at 0
+			'Mon, ',
+			'Tue, ',
+			'Wed, ',
+			'Thu, ',
+			'Fri, ',
+			'Sat, '
+		];
+
+	db.transaction(function (tx) {
+        tx.executeSql("SELECT * FROM MEASUREMENT", [], function (tx, result) {
+          
+            var len = result.rows.length;
+			console.log('idChild: ' + idChild);
+			console.log('Len: ' + len);
+            var weight, height, head, date, dddName;
+            for (index = len - 1; index >= 0; index--) {
+                var row = result.rows.item(index);
+                weight = row.weight;
+                height = row.height;
+				head = row.head;
+				date = row.measurementDate;
+
+				dddName = "kaka";
+				dddName = days[new Date(date).getDay()];
+
+				var measurementItem = "<div style='height: 55px' class='panel-heading'>";
+                measurementItem += dddName + date;
+                measurementItem += "<button style='' type='button' class='btn pull-right'>";
+                measurementItem += "<span class='glyphicon glyphicon-edit'></span>";
+                measurementItem += "</button></div>";
+				measurementItem += "<div class='panel-body'>";
+                measurementItem += "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center'>";
+                measurementItem += "<span class='glyphicon glyphicon-download-alt'></span>&nbsp;&nbsp;&nbsp; " + weight + " kg</div>";
+                measurementItem += "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center'>";
+                measurementItem += "<span class='glyphicon glyphicon-stats'></span>&nbsp;&nbsp;&nbsp; " + height + " cm</div>";
+                measurementItem += "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center'>";
+                measurementItem += "<span class='glyphicon glyphicon-user'></span>&nbsp;&nbsp;&nbsp; " + head + " cm</div></div>";
+
+				$('#measurementList').append(measurementItem);
             };
         }, null);
     });
@@ -155,16 +200,50 @@ function loadDataToChart(idChild) {
     });
 }
 
+function createChildProfile(nameInput, birthdayInput, sexInput) {
+    var db = openDatabase('kidChecker', '1.0', 'Database for kidChecker', 5 * 1024 * 1024);
+
+    // CHILDREN ADD NEW
+    db.transaction(function (tx) {
+        tx.executeSql('INSERT INTO CHILDREN (childName, birthday, sex) VALUES (?, ?, ?)', [nameInput, birthdayInput, sexInput]);
+    });
+}
+
+function deleteChildProfile(idChild) {
+    var db = openDatabase('kidChecker', '1.0', 'Database for kidChecker', 5 * 1024 * 1024);
+
+    // CHILDREN DELETE
+    db.transaction(function (tx) {
+		tx.executeSql("DELETE FROM CHILDREN WHERE id="+idChild);
+    });
+}
+
+
+function addMeasurement(weightValue, heightValue, headValue, measurementDate, idChild){
+	var db = openDatabase('kidChecker', '1.0', 'Database for kidChecker', 5 * 1024 * 1024);
+
+    // MEASUREMENT ADD NEW
+    db.transaction(function (tx) {
+        tx.executeSql('INSERT INTO MEASUREMENT (weight, height, head, measurementDate, idChild) VALUES (?, ?, ?, ?, ?)', [weightValue, heightValue, headValue, measurementDate, idChild]);
+    });
+
+}
+
+
 function initializeMasterData() {
     var db = openDatabase('kidChecker', '1.0', 'Database for kidChecker', 5 * 1024 * 1024);
 
     // CHILDREN
+    db.transaction(function (tx) { 
+        tx.executeSql('CREATE TABLE IF NOT EXISTS CHILDREN (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, childName, birthday, sex)');
+    });
+
+	// MEASUREMENT
     db.transaction(function (tx) {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS CHILDREN (id unique, childName, birthday, sex)');
-        tx.executeSql('DELETE FROM CHILDREN');
-        tx.executeSql('INSERT INTO CHILDREN (id, childName, birthday, sex) VALUES (?, ?, ?, ?)', [1, "Huynh Thanh Duy", "1991/06/14", "Boy"]);
-        tx.executeSql('INSERT INTO CHILDREN (id, childName, birthday, sex) VALUES (?, ?, ?, ?)', [2, "Ngo Huu Loc", "1980/04/16", "Girl"]);
-        tx.executeSql('INSERT INTO CHILDREN (id, childName, birthday, sex) VALUES (?, ?, ?, ?)', [3, "Bon Bon", "1990/09/03", "Girl"]);
+		tx.executeSql('DROP TABLE IF EXISTS MEASUREMENT');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS MEASUREMENT (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, weight, height, head, measurementDate, idChild)');
+		tx.executeSql('INSERT INTO MEASUREMENT (weight, height, head, measurementDate, idChild) VALUES (?, ?, ?, ?, ?)', [11, 12, 13, 2015/10/01, 5]);
+		tx.executeSql('INSERT INTO MEASUREMENT (weight, height, head, measurementDate, idChild) VALUES (?, ?, ?, ?, ?)', [21, 22, 23, 2015/10/02, 6]);
     });
 }
 
