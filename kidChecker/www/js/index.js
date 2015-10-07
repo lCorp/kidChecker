@@ -148,14 +148,12 @@ function loadDataToDetail(idChild) {
                 height = row.height;
 				head = row.head;
 				date = row.measurementDate;
-
-				dddName = "kaka";
 				dddName = days[new Date(date).getDay()];
 
 				var measurementItem = "<div style='height: 55px;' class='panel-heading'>";
                 measurementItem += dddName + date;
-                measurementItem += "<button style='' type='button' class='btn pull-right'>";
-                measurementItem += "<span class='glyphicon glyphicon-edit'></span>";
+                measurementItem += "<button onclick='setDeletingMeasurementId("+ row.id +")' type='button' class='btn pull-right' data-toggle='modal' data-target='#confirmDelMeasurementPopup'>";
+                measurementItem += "<span class='glyphicon glyphicon-remove' style='color:red'></span>";
                 measurementItem += "</button></div>";
 				measurementItem += "<div class='panel-body'>";
                 measurementItem += "<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center'>";
@@ -185,6 +183,7 @@ function loadDataToChart(idChild) {
                 var row = result.rows.item(index);
                 childId = row.id;
                 childName = row.childName;
+				birthday = row.birthday;
 				sex = row.sex;
 
 				var btnEdit = "<button type='button' class='btn pull-right' onclick='location.href=\"detail.html?id="+ childId +"\"'><span class='glyphicon glyphicon-edit pull-right'></span></button>";
@@ -195,7 +194,136 @@ function loadDataToChart(idChild) {
 				$('#titleName').append(childName + " ("+sex+")");
 				$('#titleName').append(btnEdit);
 				$('#sexValue').val(sex);
+				$('#birthdayValue').val(birthday);
             };
+        }, null);
+    });
+}
+
+function daysBetween(first, second) {
+
+    // Copy date parts of the timestamps, discarding the time parts.
+    var one = new Date(first.getFullYear(), first.getMonth(), first.getDate());
+    var two = new Date(second.getFullYear(), second.getMonth(), second.getDate());
+
+    // Do the math.
+    var millisecondsPerDay = 1000 * 60 * 60 * 24;
+    var millisBetween = two.getTime() - one.getTime();
+    var days = millisBetween / millisecondsPerDay;
+
+    // Round down.
+    return Math.floor(days);
+}
+
+function loadAndInitDataToChart(idChild, birthday) {
+    var db = openDatabase('kidChecker', '1.0', 'Database for kidChecker', 5 * 1024 * 1024);
+	
+    db.transaction(function (tx) {
+        tx.executeSql("SELECT * FROM MEASUREMENT WHERE idChild="+idChild+" ORDER BY measurementDate DESC", [], function (tx, result) {
+          
+            var len = result.rows.length;
+			console.log('idChild: ' + idChild);
+			console.log('Len: ' + len);
+
+			var thirthteenWeekTable = {
+			  weightArray : [],
+			  heightArray : [],
+			  headArray : []
+			  };
+
+			if(len == 0){
+				thirthteenWeekTable = {
+				weightArray : [],
+				heightArray : [],
+				headArray : []
+				};
+
+				$('#thirthteenWeekTable').val(JSON.stringify(thirthteenWeekTable));
+				return;
+			}
+
+			var currentWeek;
+			var flagWeight = 0;
+			var flagHeight = 0;
+			var flagHead = 0;
+			var indexWeight;
+			var indexHeight;
+			var indexHead;
+			var weightData, heightData, headData, medianCount;
+
+			for (indexWeek = 0; indexWeek <= 13; indexWeek++){
+				medianCount = 0;
+				weightData = 0;
+				heightData = 0;
+				headData = 0;
+
+				for (index = len - 1; index >= 0; index--) {
+					var row = result.rows.item(index);
+					currentWeek = Math.floor(daysBetween(new Date(birthday), new Date(row.measurementDate)) / 7);
+
+					if(currentWeek == indexWeek) {
+						weightData = weightData + parseFloat(row.weight);
+						heightData = heightData + parseFloat(row.height);
+						headData = headData + parseFloat(row.head)
+						medianCount = medianCount + 1;
+					}
+				}
+
+				if (weightData != 0){
+					weightData = weightData / medianCount;
+					flagWeight = 0;
+				}
+				else
+				{
+					if (flagWeight != 1){
+						flagWeight = 1;
+						indexWeight = indexWeek;
+					}
+				}
+
+				if (heightData != 0){
+					heightData = heightData / medianCount;
+					flagHeight = 0;
+				}
+				else
+				{
+					if (flagHeight != 1){
+						flagHeight = 1;
+						indexHeight = indexWeek;
+					}
+				}
+				if (headData != 0){
+					headData = headData / medianCount;
+					flagHead = 0;
+				}
+				else
+				{
+					if (flagHead != 1){
+						flagHead = 1;
+						indexHead = indexWeek;
+					}
+				}
+
+				thirthteenWeekTable.weightArray.push(weightData);
+				thirthteenWeekTable.heightArray.push(heightData);
+				thirthteenWeekTable.headArray.push(headData);
+			}
+			
+			if(flagWeight != 0)
+			{
+				thirthteenWeekTable.weightArray.splice(indexWeight, thirthteenWeekTable.weightArray.length - indexWeight);
+			}
+			if(flagHeight != 0)
+			{
+				thirthteenWeekTable.heightArray.splice(indexHeight, thirthteenWeekTable.heightArray.length - indexHeight);
+			}
+			if(flagHead != 0)
+			{
+				thirthteenWeekTable.headArray.splice(indexHead, thirthteenWeekTable.headArray.length - indexHead);
+			}
+
+			$('#thirthteenWeekTable').val(JSON.stringify(thirthteenWeekTable));
+			return;
         }, null);
     });
 }
@@ -223,8 +351,6 @@ function deleteChildProfile(idChild) {
     });
 }
 
-
-
 function addMeasurement(weightValue, heightValue, headValue, measurementDate, idChild){
 	var db = openDatabase('kidChecker', '1.0', 'Database for kidChecker', 5 * 1024 * 1024);
 
@@ -234,8 +360,6 @@ function addMeasurement(weightValue, heightValue, headValue, measurementDate, id
     });
 
 }
-
-
 
 function initializeMasterData() {
     var db = openDatabase('kidChecker', '1.0', 'Database for kidChecker', 5 * 1024 * 1024);
