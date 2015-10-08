@@ -361,6 +361,15 @@ function addMeasurement(weightValue, heightValue, headValue, measurementDate, id
 
 }
 
+function deleteMeasurement(deletingMeasurementId) {
+    var db = openDatabase('kidChecker', '1.0', 'Database for kidChecker', 5 * 1024 * 1024);
+
+    // MEASUREMENT DELETE
+    db.transaction(function (tx) {
+		tx.executeSql("DELETE FROM MEASUREMENT WHERE id="+deletingMeasurementId);
+    });
+}
+
 function initializeMasterData() {
     var db = openDatabase('kidChecker', '1.0', 'Database for kidChecker', 5 * 1024 * 1024);
 

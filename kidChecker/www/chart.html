@@ -34,7 +34,7 @@
     <input id='sexValue' type='hidden' />
     <input id='birthdayValue' type='hidden' />
     <input id='thirthteenWeekTable' type='hidden' />
-    <div class='context' style='height:92.3%'>
+    <div class='context' style='height:100%'>
       <div class='ui top attached demo menu'>
         <a class='item'>
           <i class='sidebar icon'></i>
@@ -46,7 +46,7 @@
           </button>
         </div>
       </div>
-      <div class='ui bottom attached segment pushable'>
+      <div class='ui bottom attached segment pushable' style='height:calc(100% - 56px)'>
         <div class='ui inverted labeled icon left inline vertical sidebar menu'>
           <a id='manageChildrenLink' style='text-align: left;' class='item' href='index.html'>
             <span class='glyphicon glyphicon-align-justify'>
@@ -702,15 +702,17 @@
 
         var query = getQueryParams(document.location.search);
 
+        // Set event
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var target = $(e.target).attr('tag') // get id of canvas from 'tag' attribute
+        loadChart(target, $('#sexValue').val());
+        });
+
         $(document).ready(function(){
         loadDataToMenu();
         loadDataToChart(query.id);
 
-        // Set event
-        $('a[data-toggle='tab']').on('shown.bs.tab', function (e) {
-        var target = $(e.target).attr('tag') // get id of canvas from 'tag' attribute
-        loadChart(target, $('#sexValue').val());
-        });
+
 
         setTimeout(function(){
         loadAndInitDataToChart(query.id, $('#birthdayValue').val());
